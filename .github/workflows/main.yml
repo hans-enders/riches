@@ -54,7 +54,7 @@ jobs:
       # Package code for FOD delivery
       - uses: montudor/action-zip@v1
         with:
-        args: zip -qq -r codepackage.zip dir
+          args: zip -qq -r codepackage.zip dir
       
       # Start Fortify on Demand SAST scan and wait until results complete. Be sure to set secrets/variables for your FoD tenant.
         # Following code copied 2021-05-13 from https://github.com/fortify/gha-sample-workflows-ssc-js-sandbox/actions/runs/635878295/workflow
