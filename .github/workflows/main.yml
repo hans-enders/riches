@@ -43,18 +43,18 @@ jobs:
           echo test, and deploy your project.
       
       # Prepare source+dependencies for upload. As this is a JS project, execute a build manually.
-      #- name: Download Fortify ScanCentral Client
+      - name: Download Fortify ScanCentral Client
         #uses: fortify/gha-setup-scancentral-client@v1
-      #- run: npm install --no-save
-      #- name: Package Code + Dependencies
-        #run: scancentral package $PACKAGE_OPTS -o package.zip
+      - run: npm install --no-save
+      - name: Package Code + Dependencies
+        run: scancentral package $PACKAGE_OPTS -o codepackage.zip
         #env:
-          #PACKAGE_OPTS: "-bt none"
+          PACKAGE_OPTS: "-bt none"
       
       # Package code for FOD delivery
-      - uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r codepackage.zip . -i dir
+      #- uses: montudor/action-zip@v1
+        #with:
+          #args: zip -qq -r codepackage.zip . -i dir
       
       # Start Fortify on Demand SAST scan and wait until results complete. Be sure to set secrets/variables for your FoD tenant.
         # Following code copied 2021-05-13 from https://github.com/fortify/gha-sample-workflows-ssc-js-sandbox/actions/runs/635878295/workflow
