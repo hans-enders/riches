@@ -63,7 +63,7 @@ jobs:
       - name: Download Fortify on Demand Universal CI Tool
         uses: fortify/gha-setup-fod-uploader@v1
       - name: Perform SAST Scan
-        run: java -jar $FOD_UPLOAD_JAR -z codepackage.zip -aurl $FOD_API_URL -purl $FOD_BASE_URL -rid "$FOD_RELEASE_ID" -tc $FOD_TENANT -ac "$FOD_API_KEY" "$FOD_PAPI_SECRET" $FOD_UPLOADER_OPTS -n "$FOD_UPLOADER_NOTES"
+        run: java -jar $FOD_UPLOAD_JAR -z codepackage.zip -aurl $FOD_API_URL -purl $FOD_BASE_URL -rid "$FOD_RELEASE_ID" -tc "$FOD_TENANT" -ac "$FOD_API_KEY" "$FOD_API_SECRET" $FOD_UPLOADER_OPTS -n "$FOD_UPLOADER_NOTES"
         #run: java -jar $FOD_UPLOAD_JAR -z codepackage.zip -aurl https://api.ams.fortify.com -purl https://ams.fortify.com -rid "219788" -tc "franklinbank" -ac "606f6480-f65f-4bbb-87f7-9e0517abc94e" "ejBnSFJAMEJZLWJ3T0V1ZmQqTTNEM0hUaVk1Qm1y0" -ep 2 -pp 0 -I 1 -apf -n "$FOD_UPLOADER_NOTES"
         env: 
           FOD_TENANT: ${{ secrets.FOD_TENANT }}  
