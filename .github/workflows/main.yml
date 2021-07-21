@@ -95,7 +95,8 @@ jobs:
           tenant: ${{ secrets.FOD_TENANT }}
           user: ${{ secrets.FOD_USER }}
           password: ${{ secrets.FOD_PAT }}
-          release-id: ${{ secrets.FOD_RELEASE_ID }}
+          release-id: "219788"
+          #release-id: ${{ secrets.FOD_RELEASE_ID }}
             #e.g. 219788 for Riches.JAVA on franklinbank tenant
           output:  ./sarif/richesJAVAoutput.sarif
             #e.g. output:  ./sarif/output.sarif
