@@ -69,7 +69,8 @@ jobs:
         env: 
           FOD_TENANT: "franklinbank"
           #FOD_TENANT: ${{ secrets.FOD_TENANT }}  
-          FOD_USER: ${{ secrets.FOD_USER }}
+          FOD_USER: "henders"
+          #FOD_USER: ${{ secrets.FOD_USER }}
           FOD_PAT: ${{ secrets.FOD_PAT }}
           FOD_RELEASE_ID: "219788"
           #FOD_RELEASE_ID: ${{ secrets.FOD_RELEASE_ID }}
