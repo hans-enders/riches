@@ -100,12 +100,12 @@ jobs:
           release-id: "219788"
           #release-id: ${{ secrets.FOD_RELEASE_ID }}
             #e.g. 219788 for Riches.JAVA on franklinbank tenant
-          output:  ./sarif/richesJAVAoutput.sarif
+          output:  ./sarif/output.sarif
             #e.g. output:  ./sarif/output.sarif
 
       # Import Fortify On Demand results to GitHub Security Code Scanning - in SARIF format
       - name: Import Results
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: ./sarif/richesJAVAoutput.sarif
+          sarif_file: ./sarif/output.sarif
           #Input file name shold match the Output name earlier/above:  e.g. sarif_file: ./sarif/output.sarif
