@@ -65,7 +65,8 @@ jobs:
       - name: Perform SAST Scan
         #run: java -jar $FOD_UPLOAD_JAR -z codepackage.zip -aurl $FOD_API_URL -purl $FOD_URL -rid "219788" -tc "$FOD_TENANT" -ac "$FOD_API_KEY" "$FOD_API_SECRET" $FOD_UPLOADER_OPTS -n "$FOD_UPLOADER_NOTES"
         #run: java -jar $FOD_UPLOAD_JAR -z codepackage.zip -aurl https://api.ams.fortify.com -purl https://ams.fortify.com -rid "219788" -tc "$FOD_TENANT" -ac "$FOD_API_KEY" "$FOD_API_SECRET" $FOD_UPLOADER_OPTS -n "$FOD_UPLOADER_NOTES"
-        run: java -jar $FOD_UPLOAD_JAR -z codepackage.zip -aurl https://api.ams.fortify.com -purl https://ams.fortify.com -rid "219788" -tc "franklinbank" -ac "606f6480-f65f-4bbb-87f7-9e0517abc94e" "ejBnSFJAMEJZLWJ3T0V1ZmQqTTNEM0hUaVk1Qm1y0" -ep 2 -pp 0 -I 1 -apf -n "$FOD_UPLOADER_NOTES"
+        #run: java -jar $FOD_UPLOAD_JAR -z codepackage.zip -aurl https://api.ams.fortify.com -purl https://ams.fortify.com -rid "219788" -tc "franklinbank" -ac "606f6480-f65f-4bbb-87f7-9e0517abc94e" "ejBnSFJAMEJZLWJ3T0V1ZmQqTTNEM0hUaVk1Qm1y0" -ep 2 -pp 0 -I 1 -apf -n "$FOD_UPLOADER_NOTES"
+        run: java -jar $FOD_UPLOAD_JAR -z codepackage.zip -aurl https://api.ams.fortify.com -purl https://ams.fortify.com -rid "219788" -ac "606f6480-f65f-4bbb-87f7-9e0517abc94e" "ejBnSFJAMEJZLWJ3T0V1ZmQqTTNEM0hUaVk1Qm1y0" -ep 2 -pp 0 -I 1 -apf -n "$FOD_UPLOADER_NOTES"
         env: 
           FOD_TENANT: ${{ secrets.FOD_TENANT }}  
           FOD_USER: ${{ secrets.FOD_USER }}
@@ -84,7 +85,8 @@ jobs:
       
       # Once FOD scan completes, pull SAST issues from Fortify On Demand and generate SARIF output.
       - name: Download Results
-        uses: fortify/gha-export-vulnerabilities@v1
+        uses: fortify/gha-fod-generate-sarif@1.1.0
+        #uses: fortify/gha-export-vulnerabilities@v1
         with:
           FOD_BASE_URL: "https://ams.fortify.com"
           #FOD_BASE_URL: ${{ secrets.FOD_URL }}
@@ -100,4 +102,5 @@ jobs:
       - name: Import Results
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: ./gh-fortify-sast.sarif
+          sarif_file: ./sarif/output.sarif
+          #sarif_file: ./gh-fortify-sast.sarif
