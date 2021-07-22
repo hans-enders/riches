@@ -94,7 +94,7 @@ jobs:
         with:
           fod_base_url: "https://ams.fortify.com/"
           #fod_base_url: ${{ secrets.FOD_BASE_URL }}
-          fod_tenant: "franklnbank"
+          fod_tenant: "franklinbank"
           #fod_tenant: ${{ secrets.FOD_TENANT }}
           fod_user: "henders"
           #fod_user: ${{ secrets.FOD_USER }}
