@@ -86,26 +86,50 @@ jobs:
           FOD_UPLOADER_NOTES: 'Triggered by GitHub Actions (${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})'
       
       # Once FOD scan completes, pull SAST issues from Fortify On Demand and generate SARIF output.
-      - name: Download Results
-        uses: fortify/gha-fod-generate-sarif@1.1.0
-        with:
-          base-url: "https://ams.fortify.com"
+      # gha-fod-generate-sarif is deprecated in lieu of using https://github.com/marketplace/actions/export-fortify-vulnerability-data
+      #- name: Download Results
+        #uses: fortify/gha-fod-generate-sarif@1.1.0
+        #with:
+          #base-url: "https://ams.fortify.com"
           #FOD_BASE_URL: ${{ secrets.FOD_URL }}
             #e.g. https://ams.fortify.com/
-          tenant: "franklinbank"
+          #tenant: "franklinbank"
           #tenant: ${{ secrets.FOD_TENANT }}
-          user: "henders"
+          #user: "henders"
           #user: ${{ secrets.FOD_USER }}
-          password: ${{ secrets.FOD_PAT }}
-          release-id: "219788"
+          #password: ${{ secrets.FOD_PAT }}
+          #release-id: "219788"
           #release-id: ${{ secrets.FOD_RELEASE_ID }}
             #e.g. 219788 for Riches.JAVA on franklinbank tenant
-          output:  ./sarif/output.sarif
+          #output:  ./sarif/output.sarif
             #e.g. output:  ./sarif/output.sarif
 
-      # Import Fortify On Demand results to GitHub Security Code Scanning - in SARIF format
+# Once FOD scan completes, pull SAST issues from Fortify On Demand and generate SARIF output.
+name: Import FoD SAST Results into GitHub Code Scanning Alerts
+on: [workflow dispatch]
+      
+jobs:                                                  
+  Export-FoD-To-GitHub:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Pull SAST issues from Fortify on Demand and generate GitHub-optimized SARIF output
+      - name: Export Results
+        uses: fortify/gha-export-vulnerabilities@v1
+        with:
+          fod_base_url: "https://ams.fortify.com"
+          #fod_base_url: ${{ secrets.FOD_BASE_URL }}
+          fod_tenant: "franklnbank"
+          #fod_tenant: ${{ secrets.FOD_TENANT }}
+          fod_user: "henders"
+          #fod_user: ${{ secrets.FOD_USER }}
+          fod_password: ${{ secrets.FOD_PAT }}
+          fod_release_id: "219788"
+          #fod_release_id: ${{ secrets.FOD_RELEASE_ID }}
+      
+      # Import Fortify SAST results to GitHub Security Code Scanning
       - name: Import Results
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: ./sarif/output.sarif
-          #Input file name shold match the Output name earlier/above:  e.g. sarif_file: ./sarif/output.sarif
+          sarif_file: ./gh-fortify-sast.sarif
+
