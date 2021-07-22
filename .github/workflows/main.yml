@@ -105,12 +105,7 @@ jobs:
             #e.g. output:  ./sarif/output.sarif
 
 # Once FOD scan completes, pull SAST issues from Fortify On Demand and generate SARIF output.
-name: Import FoD SAST Results into GitHub Code Scanning Alerts
-on: [workflow dispatch]
-      
-jobs:                                                  
-  Export-FoD-To-GitHub:
-    runs-on: ubuntu-latest
+- name: Import FoD SAST Results into GitHub Code Scanning Alerts
 
     steps:
       # Pull SAST issues from Fortify on Demand and generate GitHub-optimized SARIF output
