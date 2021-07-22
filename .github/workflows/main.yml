@@ -72,6 +72,7 @@ jobs:
           FOD_USER: "henders"
           #FOD_USER: ${{ secrets.FOD_USER }}
           FOD_PAT: ${{ secrets.FOD_PAT }}
+          # Using the PAT "Hans-PAT-ALLSCOPES"
           FOD_RELEASE_ID: "219788"
           #FOD_RELEASE_ID: ${{ secrets.FOD_RELEASE_ID }}
             #e.g. 219788 for Riches.JAVA on franklinbank tenant
@@ -98,6 +99,7 @@ jobs:
           fod_user: "henders"
           #fod_user: ${{ secrets.FOD_USER }}
           fod_password: ${{ secrets.FOD_PAT }}
+          # Using the PAT "Hans-PAT-ALLSCOPES"
           fod_release_id: "219788"
           #fod_release_id: ${{ secrets.FOD_RELEASE_ID }}
       
